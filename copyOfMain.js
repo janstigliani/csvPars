@@ -1,86 +1,63 @@
 const fs = require('fs');
 
 function readCsvFromFile(filePath){
-    const csv = fs.readFileSync(filePath, 'utf8');
-    return csv;
+   
 }
 
 function splitCsvInRows(csv){
-    const splittedCsv = csv.split(/\r?\n/);
-    return splittedCsv;
+   
 }
 
 function splitRows(arrayOfString){
-    const splittedRowsArray = [];
-    for (const row of arrayOfString) {
-        const splittedRow = row.split(',')
-        splittedRowsArray.push(splittedRow)
-    }
-    return splittedRowsArray;
+  
 }
 
 function getKeysFromFirsLine(arrayOfSplittedLines){
-    const keys = arrayOfSplittedLines[0];
-    return keys;
+    
 }
 
 function getValues(arrayOfSplittedLines){
-    const values = arrayOfSplittedLines.slice(1)
-    return values;
+    
 }
 
 function createEntry(keys, valueArray){
-    const entry = {};
-
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const value = valueArray[i]
-
-        entry[key] = value
-    }
-
-    return entry;
+  
 }
 
 function createArrayOfEntries(keys, values){
 
-    const arrayOfEntries = [];
-
-    for (let i = 0; i < values.length; i++) {
-        const valueArray = values[i];
-        
-        const entry = createEntry(keys, valueArray);
-
-        arrayOfEntries.push(entry);
-    }
-
-    return arrayOfEntries;
+   
 }
 
 function convertArrayToJson(array){
-    const json = JSON.stringify(array);
-    return json;
+   
 }
 
 function fromCsvToJson(csv){
 
     const arrayOfStringRows = splitCsvInRows(csv);
+    console.log(arrayOfStringRows);
+    
     // ["name,surname,yob,gender",
     //  "lorenzo,puppo,1995,m",
     //  "hugo,martinez,1994,m",
     //  "sara,de prà,1989,f"]
-    const arrayOfSplittedRows = splitRows(arrayOfStringRows);
+    // const arrayOfSplittedRows = splitRows(arrayOfStringRows);
+    // console.log(arrayOfSplittedRows);
     // // [["name","surname","yob","gender"],
     // // ["lorenzo","puppo","1995","m"],
     // // ["hugo","martinez","1994","m"],
     // // ["sara","de prà","1989","f"]]
-    const keys = getKeysFromFirsLine(arrayOfSplittedRows);
+    // const keys = getKeysFromFirsLine(arrayOfSplittedRows);
+    // console.log(keys);
     // //["name","surname","yob","gender"]
-    const values = getValues(arrayOfSplittedRows);
+    // const values = getValues(arrayOfSplittedRows);
+    // console.log(values);
     // // [["lorenzo","puppo","1995","m"],
     // // ["hugo","martinez","1994","m"],
     // // ["sara","de prà","1989","f"]]
-    const arrayFromEntries = createArrayOfEntries(keys, values);
+    // const arrayFromEntries = createArrayOfEntries(keys, values);
+    // console.log(arrayFromEntries);
     // // [
     // //     {
     // //         name: "lorenzo",
@@ -101,7 +78,8 @@ function fromCsvToJson(csv){
     // //         gender: 'f'
     // //     }
     // // ]
-    const json = convertArrayToJson(arrayFromEntries)
+    // const json = convertArrayToJson(arrayFromEntries)
+    // console.log(json);
     // // '[
     // //     {
     // //         "name": "lorenzo",
@@ -131,41 +109,15 @@ function writeJsonToFile(filePath, content){
 }
 
 
-// function main(){
-
-//     // const originPath = getOriginPath()
-//     // const csvData = readCsvFromFile(originPath);
-
-//     const csvData = readCsvFromFile('./data/test1.csv');
-
-//     const json = fromCsvToJson(csvData);
-
-//     console.log(json);
-
-//     // const destinationPath = getDestinationPath()
-//     //writeJsonToFile(destinationPath, json);
-
-//     writeJsonToFile('./output/test1.json', json);
-// }
-
-// main()
-
-const getOriginPath = () => process.argv[2]
-const getDestinationPath = () => process.argv[3]
-
-
 function main(){
 
-    const originPath = getOriginPath()
-    const csvData = readCsvFromFile(originPath);
+    const csvData = readCsvFromFile('./data/test1.csv');
 
     const json = fromCsvToJson(csvData);
 
     console.log(json);
 
-    const destinationPath = getDestinationPath()
-    writeJsonToFile(destinationPath, json);
-
+    writeJsonToFile('./output/test1.json', json);
 }
 
 main()
